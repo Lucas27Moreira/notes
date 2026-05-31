@@ -15,7 +15,7 @@ class CheckIsNotLogeed
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(session('user')) {
+        if (session('user_id')) {
             return redirect('/');
         }
         return $next($request);

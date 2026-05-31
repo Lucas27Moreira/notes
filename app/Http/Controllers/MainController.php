@@ -9,7 +9,10 @@ class MainController extends Controller
 {
     public function index()
     {
-        echo "I'm inside the App";
+        //load users notes
+
+        //return home page
+        return view('home');
     }
     public function newNote()
     {

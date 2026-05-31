@@ -8,7 +8,7 @@ use App\Http\Middleware\CheckIsNotLogeed;
 
 // Auth routes
 Route::middleware([CheckIsNotLogeed::class])->group(function () {
-    Route::get('/login', [AuthController::class, 'login']);
+    Route::get('/login', [AuthController::class, 'login'])->name('login');
     Route::post('/loginSubmit', [AuthController::class, 'loginSubmit'])->name('loginSubmit');
 });
 
@@ -19,7 +19,7 @@ Route::middleware([CheckIsNotLogeed::class])->group(function () {
 // app routes
 Route::middleware([CheckIsLogged::class])->group(function () {
     // Main routes
-    Route::get('/', [MainController::class, 'index']);
-    Route::get('/new-note', [MainController::class, 'newNote']);
-    Route::get('/logout', [AuthController::class, 'logout']);
+    Route::get('/', [MainController::class, 'index'])->name('home');
+    Route::get('/new-note', [MainController::class, 'newNote'])->name('newNote');
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 });
