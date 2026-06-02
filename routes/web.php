@@ -21,5 +21,10 @@ Route::middleware([CheckIsLogged::class])->group(function () {
     // Main routes
     Route::get('/', [MainController::class, 'index'])->name('home');
     Route::get('/new-note', [MainController::class, 'newNote'])->name('newNote');
+    Route::post('/newNoteSubmit', [MainController::class, 'newNoteSubmit'])->name('newNoteSubmit');
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
+    Route::get('/edit-note/{id}', [MainController::class, 'editNote'])->name('editNote');
+    Route::get('/delete-note/{id}', [MainController::class, 'deleteNote'])->name('deleteNote');
+
 });
