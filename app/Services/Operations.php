@@ -19,7 +19,7 @@ class Operations
         } catch (DecryptException $e) {
             // Handle decryption error (e.g., log the error, return null, etc.)
             // return null;
-            return redirect()->route('home');
+            return null;
 
         }
         return $value;
