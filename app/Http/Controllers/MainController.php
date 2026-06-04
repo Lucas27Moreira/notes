@@ -20,7 +20,10 @@ class MainController extends Controller
         }
 
         $user = User::find($id);
-        $notes = $user ? $user->notes()->get()->toArray() : [];
+        $notes = $user ? $user->notes()
+                              ->whereNull('deleted_at')
+                              ->get()
+                              ->toArray() : [];
 
         //return home page
         return view('home', ['notes' => $notes]);
@@ -120,6 +123,23 @@ class MainController extends Controller
     public function deleteNote($id)
     {
         $id = Operations::decryptId($id);
-        echo "I'm inside the delete note page with id: $id";
+        // load note
+        $note = Note::find($id);
+
+        // show delete note confirmation page
+        return view('delete_note', ['note' => $note]);
+    }
+
+    public function deleteNoteConfirm($id)
+    {
+        $id = Operations::decryptId($id);
+        // load note
+        $note = Note::find($id);
+
+        // delete note
+        $note->delete();
+
+        // redirect to home page
+        return redirect()->route('home');
     }
 }
